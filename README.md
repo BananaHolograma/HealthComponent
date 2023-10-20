@@ -7,6 +7,27 @@ Effortlessly simulate health and damage for entities within your video game.
 
 This component handles all aspects related to taking damage and managing health on the parent node. While typically added to a `CharacterBody2D`, there are no limitations preventing its use with a `StaticRigidBody2D`, allowing you to imbue life into objects like trees or other in-game elements.
 
+- [Requirements](#requirements)
+- [✨Installation](#installation)
+	- [Automatic (Recommended)](#automatic-recommended)
+	- [Manual](#manual)
+- [🐱‍🏍Getting started](#getting-started)
+- [Exported parameters](#exported-parameters)
+- [Accessible normal variables](#accessible-normal-variables)
+- [\_Ready()](#_ready)
+	- [Taking damage](#taking-damage)
+	- [Healing](#healing)
+	- [Health regeneration per second](#health-regeneration-per-second)
+- [Invulnerability](#invulnerability)
+- [When health reachs zero](#when-health-reachs-zero)
+	- [Death manual check](#death-manual-check)
+- [Percentage of actual health](#percentage-of-actual-health)
+- [Multiple health bars](#multiple-health-bars)
+- [Signals](#signals)
+- [You are welcome to](#you-are-welcome-to)
+- [Contribution guidelines](#contribution-guidelines)
+- [Contact us](#contact-us)
+
 # Requirements
 - Godot 4+
 
@@ -125,23 +146,6 @@ If you intend to exhibit a health bar UI, you can access the health percentage f
 ```
 This information can aid in accurately representing the health status and overflow in a visual health bar.
 
-# Signals
-```py
-### 
-# You can access the action type in the health_changed signal
-# to determine what kind of action was taken and act accordingly to the flow of your game.
-###
-
-enum TYPES {
-	DAMAGE,
-	HEALTH,
-	REGEN
-}
-
-signal health_changed(amount: int, type: TYPES)
-signal invulnerability_changed(active: bool)
-signal died
-```
 # Multiple health bars
 To achieve this mechanic you can simple add multiple health components as childs on the target node and create a basic chain responsibility logic using the died signal. This is a very basic example and we recommend that you adapt it to your needs if they are a little more complex, we just want to give you a basic idea.
 
@@ -160,6 +164,25 @@ func on_life_bar_consumed():
 
 	## Continue the logic...
 ```
+
+# Signals
+```py
+### 
+# You can access the action type in the health_changed signal
+# to determine what kind of action was taken and act accordingly to the flow of your game.
+###
+
+enum TYPES {
+	DAMAGE,
+	HEALTH,
+	REGEN
+}
+
+signal health_changed(amount: int, type: TYPES)
+signal invulnerability_changed(active: bool)
+signal died
+```
+
 
 # You are welcome to
 - [Give feedback](https://github.com/godotessentials/2d-essentials/pulls)
