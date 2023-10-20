@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2023] [s3r0s4pi3ns]
+Copyright (c) [2023] [BananaHolograma]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -57,24 +57,120 @@ If the `is_invulnerable` variable is set to true, any incoming damage, regardles
 
 ```py
 @onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+
 health_component.damage(10)
 health_component.damage(99)
 
 # Parameter is treated as absolute value
 health_component.damage(-50) # translate to 50 inside the function
+```
 
+## Healing
+The functionality mirrors that of the damage function, but in this instance, health is added to the component. It's important to note that the healing process can never surpass the predetermined `max_health_overflow`. 
+
+Following each execution of the health function, a `health_changed` signal is emitted.
+```py
+@onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+
+health_component.health(25)
+# Parameter is treated as absolute value
+health_component.health(-50)
+```
+## Health regeneration per second
+By default, health regeneration occurs every second. When the health component invokes the `damage()` function, regeneration is activated until the maximum health is reached, at which point it deactivates.
+You have the flexibility to dynamically adjust the rate of regeneration per second using the `enable_health_regen` function. Alternatively, you can set it to zero to disable health regeneration altogether:
+```py
+@onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+
+health_component.enable_health_regen(10)
+# or disable it
+health_component.enable_health_regen(0)
+```
+# Invulnerability
+You have the ability to toggle invulnerability on or off through the `enable_invulnerability` function. By providing the enable parameter *(a boolean)*, you can specify whether invulnerability is activated or not. Additionally, you can set a time duration *(in seconds)* during which the entity will be invulnerable. Once the specified time limit is reached, invulnerability will be deactivated:
+```py
+@onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+
+health_component.enable_invulnerability(true, 2.5)
+# You can deactivating it manually with
+health_component.enable_invulnerability(false)
+```
+# When health reachs zero
+This component solely emits a `died` signal, offering you the flexibility to tailor the behavior to your game's needs. By establishing a connection to this signal, you can trigger animations, function calls, collect statistics, and perform other relevant actions to customize the experience according to your game's requirements
+
+## Death manual check
+Perform a manual check to ascertain if the entity has entered the death state. If you wish to manually determine this state, you can utilize the `check_is_death` function. This function emits the `died signal` if the current health reaches zero.
+```py
+@onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+
+var is_dead: bool = health_component.check_is_death()
+```
+# Percentage of actual health
+If you intend to exhibit a health bar UI, you can access the health percentage format through the `get_health_percent()` function. This function returns a dictionary structured as follows:
+```py
+# For instance, if 80% of the maximum health represents the current health:
+
+{
+   "current_health_percentage": 0.8,
+   "overflow_health_percentage": 0.0,
+   "overflow_health": 0
+}
+
+# Similarly, considering a maximum health of 100, a health overflow percentage of 20.0, and a current health of 120:
+
+{ "current_health_percentage": 1.0,
+   "overflow_health_percentage": 0.2,
+   "overflow_health": 20
+}
+```
+This information can aid in accurately representing the health status and overflow in a visual health bar.
+
+# Signals
+```py
+### 
+# You can access the action type in the health_changed signal
+# to determine what kind of action was taken and act accordingly to the flow of your game.
+###
+
+enum TYPES {
+	DAMAGE,
+	HEALTH,
+	REGEN
+}
+
+signal health_changed(amount: int, type: TYPES)
+signal invulnerability_changed(active: bool)
+signal died
+```
+# Multiple health bars
+To achieve this mechanic you can simple add multiple health components as childs on the target node and create a basic chain responsibility logic using the died signal. This is a very basic example and we recommend that you adapt it to your needs if they are a little more complex, we just want to give you a basic idea.
+
+```py
+@onready var health_component = $HealthComponent as GodotParadiseHealthComponent
+@onready var health_component2 = $HealthComponent2 as GodotParadiseHealthComponent
+@onready var health_component3 = $HealthComponent3 as GodotParadiseHealthComponent
+
+var life_bars := [health_component, health_component2, health_component3]
+
+func _ready():
+	life_bars.back().died.connect(on_life_bar_consumed)
+	
+func on_life_bar_consumed():
+	var last_life_bar = life_bars.pop_back()
+
+	## Continue the logic...
 ```
 
 # You are welcome to
-- [Give feedback](https://github.com/GodotParadise/health-component/pulls)
-- [Suggest improvements](https://github.com/GodotParadise/health-component/issues/new?assignees=s3r0s4pi3ns&labels=enhancement&template=feature_request.md&title=)
-- [Bug report](https://github.com/GodotParadise/health-component/issues/new?assignees=s3r0s4pi3ns&labels=bug%2C+task&template=bug_report.md&title=)
+- [Give feedback](https://github.com/godotessentials/2d-essentials/pulls)
+- [Suggest improvements](https://github.com/godotessentials/2d-essentials/issues/new?assignees=s3r0s4pi3ns&labels=enhancement&template=feature_request.md&title=)
+- [Bug report](https://github.com/godotessentials/2d-essentials/issues/new?assignees=s3r0s4pi3ns&labels=bug%2C+task&template=bug_report.md&title=)
 
 - - -
 # Contribution guidelines
 **Thank you for your interest in Godot Paradise!**
 
-To ensure a smooth and collaborative contribution process, please review our [contribution guidelines](https://github.com/GodotParadise/health-component/blob/master/CONTRIBUTING.md) before getting started. These guidelines outline the standards and expectations we uphold in this project.
+To ensure a smooth and collaborative contribution process, please review our [contribution guidelines](https://github.com/godotessentials/2d-essentials/blob/master/CONTRIBUTING.md) before getting started. These guidelines outline the standards and expectations we uphold in this project.
 
 **Code of Conduct:** We strictly adhere to the Godot code of conduct in this project. As a contributor, it is important to respect and follow this code to maintain a positive and inclusive community.
 

@@ -37,7 +37,6 @@ signal died
 ## How long the invulnerability will last, set this value as zero to be an indefinite period
 @export var invulnerability_time: float = 1.0
 
-
 enum TYPES {
 	DAMAGE,
 	HEALTH,
@@ -87,6 +86,16 @@ func check_is_dead() -> bool:
 
 	return is_dead
 
+
+func get_health_percent() -> Dictionary:
+	var current_health_percentage = snappedf(CURRENT_HEALTH / float(MAX_HEALTH), 0.01)
+	
+	return {
+		"current_health_percentage": minf(current_health_percentage, 1.0),
+		"overflow_health_percentage": maxf(0.0, current_health_percentage - 1.0),
+		"overflow_health": max(0, CURRENT_HEALTH - MAX_HEALTH)
+	}
+	
 
 func enable_invulnerability(enable: bool, time: float = invulnerability_time):
 	if enable:

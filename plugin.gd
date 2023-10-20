@@ -3,7 +3,6 @@ extends EditorPlugin
 
 const PLUGIN_PREFIX = "GodotParadise"
 
-
 func _enter_tree():
 	add_custom_type(_add_prefix("HealthComponent"), "Node", preload("res://addons/health_component/health_component.gd"), preload("res://addons/health_component/suit_hearts.svg"))
 
