@@ -1,5 +1,5 @@
 <p align="center">
-	<img width="256px" src="https://github.com/GodotParadise/health-component/blob/main/icon.jpg" alt="GodotParadiseHealthComponent logo" />
+	<img width="256px" src="https://github.com/GodotParadise/HealthComponent/blob/main/icon.jpg" alt="GodotParadiseHealthComponent logo" />
 	<h1 align="center">Godot Paradise Health Component</h1>
 </p>
 
