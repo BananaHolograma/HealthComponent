@@ -23,7 +23,7 @@ You can download this plugin from the official [Godot asset library](https://god
 ##  Manual 
 To manually install the plugin, create an **"addons"** folder at the root of your Godot project and then download the contents from the **"addons"** folder of this repository
 
-# Wiki
+# 📋Wiki
 Learn how to use this component on detail on the [wiki](https://github.com/GodotParadise/HealthComponent/wiki) section
 
 # You are welcome to
