@@ -27,9 +27,9 @@ To manually install the plugin, create an **"addons"** folder at the root of you
 Learn how to use this component on detail on the [wiki](https://github.com/GodotParadise/HealthComponent/wiki) section
 
 # You are welcome to
-- [Give feedback](https://github.com/godotessentials/2d-essentials/pulls)
-- [Suggest improvements](https://github.com/godotessentials/2d-essentials/issues/new?assignees=s3r0s4pi3ns&labels=enhancement&template=feature_request.md&title=)
-- [Bug report](https://github.com/godotessentials/2d-essentials/issues/new?assignees=s3r0s4pi3ns&labels=bug%2C+task&template=bug_report.md&title=)
+- [Give feedback](https://github.com/GodotParadise/HealthComponent/pulls)
+- [Suggest improvements](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=enhancement&template=feature_request.md&title=)
+- [Bug report](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=bug%2C+task&template=bug_report.md&title=)
 
 - - -
 # Contribution guidelines
