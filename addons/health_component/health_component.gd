@@ -163,10 +163,12 @@ func on_health_changed(amount: int, type: TYPES):
 		enable_health_regen()
 		Callable(check_is_dead).call_deferred()
 
+
 func on_died():
 	health_regen_timer.stop()
 	invulnerability_timer.stop()
 	
+
 func on_health_regen_timer_timeout():
 	health(HEALTH_REGEN_PER_SECOND, TYPES.REGEN)
 
