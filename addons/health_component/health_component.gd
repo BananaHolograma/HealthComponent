@@ -117,7 +117,7 @@ func enable_health_regen(amount: int = HEALTH_REGEN, time: float = HEALTH_REGEN_
 	_create_health_regen_timer(HEALTH_REGEN_TICK_TIME)
 	
 	if health_regen_timer:
-		if CURRENT_HEALTH == MAX_HEALTH and health_regen_timer.time_left > 0 or HEALTH_REGEN <= 0:
+		if CURRENT_HEALTH >= MAX_HEALTH and (health_regen_timer.time_left > 0 or HEALTH_REGEN <= 0):
 			health_regen_timer.stop()
 			return
 		
@@ -125,8 +125,9 @@ func enable_health_regen(amount: int = HEALTH_REGEN, time: float = HEALTH_REGEN_
 			if time != health_regen_timer.wait_time:
 				health_regen_timer.stop();
 				health_regen_timer.wait_time = time;
-				
-			health_regen_timer.start()
+			
+			if not health_regen_timer.time_left > 0:
+				health_regen_timer.start()
 
 
 func _create_health_regen_timer(time: float = HEALTH_REGEN_TICK_TIME):

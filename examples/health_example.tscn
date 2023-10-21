@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://3lmb4cduy8ra"]
+
+[ext_resource type="Script" path="res://examples/health_example.gd" id="1_ibgao"]
+[ext_resource type="Script" path="res://addons/health_component/health_component.gd" id="1_oxkff"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adjem"]
+bg_color = Color(0.87451, 0.239216, 0.231373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gp6oo"]
+bg_color = Color(0.180392, 0.717647, 0.439216, 1)
+
+[node name="HealthExample" type="Node2D"]
+script = ExtResource("1_ibgao")
+
+[node name="GodotParadiseHealthComponent" type="Node" parent="."]
+script = ExtResource("1_oxkff")
+MAX_HEALTH = 250
+HEALTH_OVERFLOW_PERCENTAGE = 15.0
+CURRENT_HEALTH = 250
+INVULNERABILITY_TIME = 2.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_adjem")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gp6oo")
+show_percentage = false
+
+[node name="HealthPoints" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="ReviveButton" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Revive"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Damage" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Damage"
+
+[node name="Health" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Health"
+
+[node name="HealthRegenCheck" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Health regen"
+
+[node name="Invulnerable" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Invulnerable
+"
+
+[connection signal="died" from="GodotParadiseHealthComponent" to="." method="_on_godot_paradise_health_component_died"]
+[connection signal="health_changed" from="GodotParadiseHealthComponent" to="." method="_on_godot_paradise_health_component_health_changed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/ReviveButton" to="." method="_on_revive_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Damage" to="." method="_on_damage_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Health" to="." method="_on_health_pressed"]
+[connection signal="toggled" from="CanvasLayer/Control/MarginContainer/VBoxContainer/HealthRegenCheck" to="." method="_on_health_regen_check_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Invulnerable" to="." method="_on_invulnerable_toggled"]
