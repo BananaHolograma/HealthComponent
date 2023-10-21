@@ -126,7 +126,7 @@ func enable_health_regen(amount: int = HEALTH_REGEN, time: float = HEALTH_REGEN_
 				health_regen_timer.stop();
 				health_regen_timer.wait_time = time;
 			
-			if not health_regen_timer.time_left > 0:
+			if not health_regen_timer.time_left > 0 or health_regen_timer.is_stopped():
 				health_regen_timer.start()
 
 
