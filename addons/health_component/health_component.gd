@@ -11,7 +11,6 @@ class_name GodotParadiseHealthComponent extends Node
 
 signal health_changed(amount: int, type: TYPES)
 signal invulnerability_changed(active: bool)
-signal life_bar_consumed(remaining: int)
 signal died
 
 @export_group("Health Parameters")
@@ -26,7 +25,9 @@ signal died
 
 @export_group("Additional Behaviors")
 ## The amount of health regenerated each second
-@export var HEALTH_REGEN_PER_SECOND: int = 0
+@export var HEALTH_REGEN: int = 0
+## Every tick it applies the health regen amount value
+@export var HEALTH_REGEN_TICK_TIME : float = 1.0
 ## The invulnerability flag, when is true no damage is received but can be healed
 @export var IS_INVULNERABLE: bool = false:
 	set(value):
@@ -35,7 +36,7 @@ signal died
 		
 		IS_INVULNERABLE = value
 ## How long the invulnerability will last, set this value as zero to be an indefinite period
-@export var invulnerability_time: float = 1.0
+@export var INVULNERABILITY_TIME: float = 1.0
 
 enum TYPES {
 	DAMAGE,
@@ -53,9 +54,8 @@ var max_health_overflow: int:
 
 
 func _ready():
-	_create_health_regen_timer()
-	_create_invulnerability_timer()
-	enable_health_regen(HEALTH_REGEN_PER_SECOND)
+	enable_health_regen(HEALTH_REGEN)
+	enable_invulnerability(IS_INVULNERABLE, INVULNERABILITY_TIME);
 	
 	health_changed.connect(on_health_changed)
 	died.connect(on_died)
@@ -97,67 +97,73 @@ func get_health_percent() -> Dictionary:
 	}
 	
 
-func enable_invulnerability(enable: bool, time: float = invulnerability_time):
-	if enable:
-		IS_INVULNERABLE = true
-		
-		if invulnerability_timer == null:
-			_create_invulnerability_timer(time) 
-		
-		invulnerability_timer.start()
+func enable_invulnerability(enable: bool, time: float = INVULNERABILITY_TIME):
+	IS_INVULNERABLE = enable;
+	INVULNERABILITY_TIME = time;
+
+	_create_invulnerability_timer(INVULNERABILITY_TIME);
+
+	if IS_INVULNERABLE:
+		if INVULNERABILITY_TIME > 0:
+			invulnerability_timer.start()
 	else:
-		IS_INVULNERABLE = false
-		
-		if invulnerability_timer:
-			invulnerability_timer.stop()
+		invulnerability_timer.stop()
 
 
-func enable_health_regen(amount_per_second: int = HEALTH_REGEN_PER_SECOND):
-	HEALTH_REGEN_PER_SECOND = amount_per_second
+func enable_health_regen(amount: int = HEALTH_REGEN, time: float = HEALTH_REGEN_TICK_TIME):
+	HEALTH_REGEN = amount
+	HEALTH_REGEN_TICK_TIME = time;
+	
+	_create_health_regen_timer(HEALTH_REGEN_TICK_TIME)
 	
 	if health_regen_timer:
-		if CURRENT_HEALTH == MAX_HEALTH and health_regen_timer.time_left > 0 or amount_per_second <= 0:
+		if CURRENT_HEALTH == MAX_HEALTH and health_regen_timer.time_left > 0 or HEALTH_REGEN <= 0:
 			health_regen_timer.stop()
 			return
 		
-		if health_regen_timer.is_stopped() and HEALTH_REGEN_PER_SECOND > 0:
+		if HEALTH_REGEN > 0:
+			if time != health_regen_timer.wait_time:
+				health_regen_timer.stop();
+				health_regen_timer.wait_time = time;
+				
 			health_regen_timer.start()
 
 
-## DINAMIC TIMER CREATION ##
-func _create_health_regen_timer(time: float = 1.0):
-	if health_regen_timer == null:
-		var new_health_regen_timer: Timer = Timer.new()
-		
-		new_health_regen_timer.name = "HealthRegenTimer"
-		new_health_regen_timer.wait_time = time
-		new_health_regen_timer.one_shot = false
-		
-		health_regen_timer = new_health_regen_timer
-		add_child(new_health_regen_timer)
-		
-		new_health_regen_timer.timeout.connect(on_health_regen_timer_timeout)
-
-func _create_invulnerability_timer(time: float = invulnerability_time):
-	if invulnerability_timer and invulnerability_timer.wait_time != time:
-		invulnerability_timer.stop()
-		invulnerability_timer.wait_time = time
+func _create_health_regen_timer(time: float = HEALTH_REGEN_TICK_TIME):
+	if health_regen_timer:
+		if health_regen_timer.wait_time != time:
+			health_regen_timer.stop()
+			health_regen_timer.wait_time = time
 	else:
-		var new_invulnerability_timer: Timer = Timer.new()
+		health_regen_timer = Timer.new()
 		
-		new_invulnerability_timer.name = "InvulnerabilityTimer"
-		new_invulnerability_timer.wait_time = time
-		new_invulnerability_timer.one_shot = true
-		new_invulnerability_timer.autostart = false
+		health_regen_timer.name = "HealthRegenTimer"
+		health_regen_timer.wait_time = time
+		health_regen_timer.one_shot = false
 		
-		invulnerability_timer = new_invulnerability_timer
-		add_child(new_invulnerability_timer)
+		add_child(health_regen_timer)
 		
-		new_invulnerability_timer.timeout.connect(on_invulnerability_timer_timeout)
+		health_regen_timer.timeout.connect(on_health_regen_timer_timeout)
 
+func _create_invulnerability_timer(time: float = INVULNERABILITY_TIME):
+	if invulnerability_timer:
+		if invulnerability_timer.wait_time != time:
+			invulnerability_timer.stop()
+			invulnerability_timer.wait_time = time
+	else:
+		invulnerability_timer = Timer.new()
+		
+		invulnerability_timer.name = "InvulnerabilityTimer"
+		invulnerability_timer.wait_time = time
+		invulnerability_timer.one_shot = true
+		invulnerability_timer.autostart = false
+		
+		add_child(invulnerability_timer)
+		
+		invulnerability_timer.timeout.connect(on_invulnerability_timer_timeout)
+		
 
 ## SIGNAL CALLBACKS ##
-
 func on_health_changed(amount: int, type: TYPES):
 	if type == TYPES.DAMAGE:
 		enable_health_regen()
@@ -170,7 +176,7 @@ func on_died():
 	
 
 func on_health_regen_timer_timeout():
-	health(HEALTH_REGEN_PER_SECOND, TYPES.REGEN)
+	health(HEALTH_REGEN, TYPES.REGEN)
 
 		
 func on_invulnerability_timer_timeout():
