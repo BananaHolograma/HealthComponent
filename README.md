@@ -188,6 +188,10 @@ func _ready():
 	
 func on_life_bar_consumed():
 	var last_life_bar = life_bars.pop_back()
+	last_life_bar.died.disconnect(on_life_bar_consumed)
+
+	if life_bars.size() > 0:
+		life_bars.back().died.connect(on_life_bar_consumed)
 
 	## Continue the logic...
 ```

@@ -7,7 +7,7 @@ extends Node2D
 @onready var damage: Button = %Damage
 @onready var health: Button = %Health
 @onready var health_regen_check: CheckBox = %HealthRegenCheck
-@onready var invulnerable: CheckBox = %Invulnerable
+@onready var invulnerable_checkbox: CheckBox = %Invulnerable
 
 
 func _ready():
@@ -17,6 +17,8 @@ func _ready():
 
 	health_regen_check.button_pressed = health_component.HEALTH_REGEN > 0
 	revive_button.visible = health_component.CURRENT_HEALTH == 0 
+	
+	health_component.invulnerability_changed.connect(on_invulnerability_changed)
 
 
 func _on_damage_pressed():
@@ -45,6 +47,10 @@ func _on_health_regen_check_toggled(button_pressed):
 
 func _on_invulnerable_toggled(button_pressed):
 	health_component.enable_invulnerability(button_pressed)
+
+
+func on_invulnerability_changed(enabled):
+	invulnerable_checkbox.button_pressed = enabled;
 
 
 func _on_godot_paradise_health_component_died():

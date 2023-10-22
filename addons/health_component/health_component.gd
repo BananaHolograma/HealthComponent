@@ -132,14 +132,14 @@ func enable_health_regen(amount: int = HEALTH_REGEN, time: float = HEALTH_REGEN_
 
 func _create_health_regen_timer(time: float = HEALTH_REGEN_TICK_TIME):
 	if health_regen_timer:
-		if health_regen_timer.wait_time != time:
+		if health_regen_timer.wait_time != time and time > 0:
 			health_regen_timer.stop()
 			health_regen_timer.wait_time = time
 	else:
 		health_regen_timer = Timer.new()
 		
 		health_regen_timer.name = "HealthRegenTimer"
-		health_regen_timer.wait_time = time
+		health_regen_timer.wait_time = max(0.05, time)
 		health_regen_timer.one_shot = false
 		
 		add_child(health_regen_timer)
@@ -148,14 +148,14 @@ func _create_health_regen_timer(time: float = HEALTH_REGEN_TICK_TIME):
 
 func _create_invulnerability_timer(time: float = INVULNERABILITY_TIME):
 	if invulnerability_timer:
-		if invulnerability_timer.wait_time != time:
+		if invulnerability_timer.wait_time != time and time > 0:
 			invulnerability_timer.stop()
 			invulnerability_timer.wait_time = time
 	else:
 		invulnerability_timer = Timer.new()
 		
 		invulnerability_timer.name = "InvulnerabilityTimer"
-		invulnerability_timer.wait_time = time
+		invulnerability_timer.wait_time = max(0.05, time)
 		invulnerability_timer.one_shot = true
 		invulnerability_timer.autostart = false
 		
