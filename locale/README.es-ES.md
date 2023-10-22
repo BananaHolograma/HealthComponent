@@ -8,12 +8,38 @@
 [![License](https://img.shields.io/github/license/GodotParadise/HealthComponent?cacheSeconds=2592000)](https://github.com/GodotParadise/HealthComponent/blob/main/LICENSE.md)
 [![Wiki](https://img.shields.io/badge/Read-wiki-cc5490.svg?logo=github)](https://github.com/GodotParadise/HealthComponent/wiki)
 </p>
-- - -
+
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/GodotParadise/HealthComponent/blob/main/locale/README.es-ES.md)
+
 - - -
 Simule sin esfuerzo la salud y el daño de las entidades dentro de tu videojuego.
 
 Este componente maneja todos los aspectos relacionados con la recepción de daños y la gestión de la salud en el nodo padre. Aunque normalmente se añade a un `CharacterBody2D`, no hay limitaciones que impidan su uso con un `StaticRigidBody2D`, lo que le permite imbuir vida a objetos como árboles u otros elementos del juego.
+
+- [Requerimientos](#requerimientos)
+- [✨Instalacion](#instalacion)
+	- [Automatica (Recomendada)](#automatica-recomendada)
+	- [Manual](#manual)
+- [Como empezar](#como-empezar)
+- [\_Ready()](#_ready)
+- [Examples](#examples)
+- [Parámetros exportados](#parámetros-exportados)
+- [Variables normales accessibles](#variables-normales-accessibles)
+- [Funcionalidad](#funcionalidad)
+	- [Recibir daño](#recibir-daño)
+	- [Curación](#curación)
+	- [Curación de vida por segundo](#curación-de-vida-por-segundo)
+- [Invulnerabilidad](#invulnerabilidad)
+- [Cuando la vida alcanza cero](#cuando-la-vida-alcanza-cero)
+	- [Comprobacion manual de muerte](#comprobacion-manual-de-muerte)
+- [Porcentaje de la vida actual](#porcentaje-de-la-vida-actual)
+- [Multiple health bars](#multiple-health-bars)
+- [Señales](#señales)
+- [Eres bienvenido a](#eres-bienvenido-a)
+- [Normas de contribución](#normas-de-contribución)
+- [Contáctanos](#contáctanos)
+
+
 
 # Requerimientos
 📢 No soportamos versiones inferiores de Godot 3+ ya que nos concentramos en las versiones estables del futuro a partir de la 4 en adelante.
@@ -191,25 +217,24 @@ signal invulnerability_changed(active: bool)
 signal died
 ```
 
-
-# You are welcome to
+# Eres bienvenido a
 - [Give feedback](https://github.com/GodotParadise/HealthComponent/pulls)
 - [Suggest improvements](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=enhancement&template=feature_request.md&title=)
 - [Bug report](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=bug%2C+task&template=bug_report.md&title=)
 
-GodotParadise is available for free.
+GodotParadise esta disponible de forma gratuita.
 
-If you're grateful for what we're doing, please consider a donation. Developing GodotParadise requires massive amount of time and knowledge, especially when it comes to Godot. Even $1 is highly appreciated and shows that you care. Thank you!
-
-
-- - -
-# Contribution guidelines
-**Thank you for your interest in Godot Paradise!**
-To ensure a smooth and collaborative contribution process, please review our [contribution guidelines](https://github.com/GodotParadise/HealthComponent/blob/main/CONTRIBUTING.md) before getting started. These guidelines outline the standards and expectations we uphold in this project.
-
-**Code of Conduct:** We strictly adhere to the [Godot code of conduct](https://godotengine.org/code-of-conduct/) in this project. As a contributor, it is important to respect and follow this code to maintain a positive and inclusive community.
+Si estas agradecido por lo que hacemos, por favor, considera hacer una donación. Desarrollar los plugins y contenidos de GodotParadise requiere una gran cantidad de tiempo y conocimiento, especialmente cuando se trata de Godot. Incluso 1€ es muy apreciado y demuestra que te importa. ¡Muchas Gracias!
 
 - - -
+# Normas de contribución
+**¡Gracias por tu interes en GodotParadise!**
 
-# Contact us
-If you have built a project, demo, script or example with this plugin let us know and we can publish it here in the repository to help us to improve and to know that what we do is useful.
+Para garantizar un proceso de contribución fluido y colaborativo, revise nuestras [directrices de contribución](https://github.com/godotparadise/[PLUGIN]/blob/main/CONTRIBUTING.md) antes de empezar. Estas directrices describen las normas y expectativas que mantenemos en este proyecto.
+
+**Código de conducta:** En este proyecto nos adherimos estrictamente al [Código de conducta de Godot](https://godotengine.org/code-of-conduct/). Como colaborador, es importante respetar y seguir este código para mantener una comunidad positiva e inclusiva.
+- - -
+
+
+# Contáctanos
+Si has construido un proyecto, demo, script o algun otro ejemplo usando este plugin haznoslo saber y podemos publicarlo en este repositorio para ayudarnos a mejorar y saber que lo que hacemos es útil.

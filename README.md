@@ -8,12 +8,37 @@
 [![License](https://img.shields.io/github/license/GodotParadise/HealthComponent?cacheSeconds=2592000)](https://github.com/GodotParadise/HealthComponent/blob/main/LICENSE.md)
 [![Wiki](https://img.shields.io/badge/Read-wiki-cc5490.svg?logo=github)](https://github.com/GodotParadise/HealthComponent/wiki)
 </p>
-- - -
+
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/GodotParadise/HealthComponent/blob/main/locale/README.es-ES.md)
+
 - - -
 Effortlessly simulate health and damage for entities within your video game.
 
 This component handles all aspects related to taking damage and managing health on the parent node. While typically added to a `CharacterBody2D`, there are no limitations preventing its use with a `StaticRigidBody2D`, allowing you to imbue life into objects like trees or other in-game elements.
+
+- [Requirements](#requirements)
+- [✨Installation](#installation)
+	- [Automatic (Recommended)](#automatic-recommended)
+	- [Manual](#manual)
+- [Getting Started](#getting-started)
+	- [\_Ready()](#_ready)
+- [Examples](#examples)
+- [Exported parameters](#exported-parameters)
+- [Accessible normal variables](#accessible-normal-variables)
+- [Functionality](#functionality)
+	- [Taking damage](#taking-damage)
+	- [Healing](#healing)
+	- [Health regeneration per second](#health-regeneration-per-second)
+- [Invulnerability](#invulnerability)
+- [When health reachs zero](#when-health-reachs-zero)
+	- [Death manual check](#death-manual-check)
+- [Percentage of actual health](#percentage-of-actual-health)
+- [Multiple health bars](#multiple-health-bars)
+- [Signals](#signals)
+- [You are welcome to](#you-are-welcome-to)
+- [Contribution guidelines](#contribution-guidelines)
+- [Contact us](#contact-us)
+
 
 # Requirements
 📢 We don't currently give support to Godot 3+ as we focus on future stable versions from version 4 onwards
