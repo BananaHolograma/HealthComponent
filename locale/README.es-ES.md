@@ -9,7 +9,7 @@
 [![Wiki](https://img.shields.io/badge/Read-wiki-cc5490.svg?logo=github)](https://github.com/GodotParadise/HealthComponent/wiki)
 </p>
 
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/GodotParadise/HealthComponent/blob/main/locale/README.es-ES.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/GodotParadise/HealthComponent/blob/main/README.md)
 
 - - -
 Simule sin esfuerzo la salud y el daño de las entidades dentro de tu videojuego.
