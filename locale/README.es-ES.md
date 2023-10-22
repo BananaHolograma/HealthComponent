@@ -219,9 +219,9 @@ signal died
 ```
 
 # Eres bienvenido a
-- [Give feedback](https://github.com/GodotParadise/HealthComponent/pulls)
-- [Suggest improvements](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=enhancement&template=feature_request.md&title=)
-- [Bug report](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=bug%2C+task&template=bug_report.md&title=)
+- [Dar feedback](https://github.com/GodotParadise/HealthComponent/pulls)
+- [Sugerir mejoras](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=enhancement&template=feature_request.md&title=)
+- [Reportar bugs](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=bug%2C+task&template=bug_report.md&title=)
 
 GodotParadise esta disponible de forma gratuita.
 
