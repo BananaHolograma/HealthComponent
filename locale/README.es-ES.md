@@ -6,7 +6,7 @@
 [![Stars](https://img.shields.io/github/stars/godotparadise/HealthComponent)](https://github.com/GodotParadise/HealthComponent/stargazers)
 [![Total downloads](https://img.shields.io/github/downloads/GodotParadise/HealthComponent/total.svg?label=Downloads&logo=github&cacheSeconds=600)](https://github.com/GodotParadise/HealthComponent/releases)
 [![License](https://img.shields.io/github/license/GodotParadise/HealthComponent?cacheSeconds=2592000)](https://github.com/GodotParadise/HealthComponent/blob/main/LICENSE.md)
-[![Wiki](https://img.shields.io/badge/Read-wiki-cc5490.svg?logo=github)](https://github.com/GodotParadise/HealthComponent/wiki)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/godotparadise[PLUGIN]/pulls)
 </p>
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/GodotParadise/HealthComponent/blob/main/README.md)
@@ -97,7 +97,7 @@ Ejemplo: `max_health of 120 and health overflow percentage of 15% = 138`
 Tienes una vida maxima normal de 120 pero puede ser sobrepasada un 15% por lo que el nuevo limite es 138. Esto puede ser util para implementar mecánicas de escudo donde necesitas separar los tipos de vida.
 
 # Funcionalidad
-## Recibir daño
+## ❤️‍🩹Recibir daño
 Para restar una cantidad específica de salud, puedes invocar sin esfuerzo la función `damage()` dentro del componente. 
 Esto provoca la emisión de una señal `health_changed` cada vez que se inflige daño. Además, el componente controla constantemente si la salud actual ha caído en picado hasta cero, activando posteriormente una señal de `died`.
 Cabe destacar que el componente se conecta de forma autónoma a su propia señal de `died`, lo que detiene simultáneamente el temporizador de regeneración de salud y el temporizador de invulnerabilidad. 
@@ -114,7 +114,7 @@ health_component.damage(99)
 health_component.damage(-50) # Se transforma en 50 dentro de la funcion
 ```
 
-## Curación
+## 💓Curación
 Similar a la de daño pero esta vez, la cantidad es añadida como vida. Es importante anotar que el proceso de curación cuando la cantidad supera el valor de la variable `max_health_overflow` se usa este como límite.
 
 En cada ejecución de la función, una señal `health_changed` es emitida.
@@ -125,7 +125,7 @@ health_component.health(25)
 # Parametro es tratado como valor absoluto
 health_component.health(-50) # Se transforma en 50 dentro de la funcion
 ```
-## Curación de vida por segundo
+## 💚Curación de vida por segundo
 Cuando se invoca la función `damage()`, la regeneración es activada *(si health_regen es > 0)* hasta que la vida máxima es alcanzada, y en cuanto esto sucede, se desactiva.
 Tienes la flexilidad de ajustar la cantidad de curación el intervalo de tiempo en el que tiene que suceder. Dejar el valor de `health_regen` a cero si se quiere deshabilitar.
 
@@ -136,7 +136,7 @@ health_component.enable_health_regen(10)
 # o deshabilitarlo
 health_component.enable_health_regen(0)
 ```
-# Invulnerabilidad
+# 💛Invulnerabilidad
 Tienes la posibilidad de activar o desactivar la invulnerabilidad a través de la función `enable_invulnerability`. Proporcionando el parámetro enable *(a boolean)*, puedes especificar si la invulnerabilidad está activada o no. Además, puedes establecer un tiempo de duración *(en segundos)* durante el cual la entidad será invulnerable. Una vez alcanzado el límite de tiempo especificado, la invulnerabilidad se desactivará:
 ```py
 @onready var health_component = $HealthComponent as GodotParadiseHealthComponent
@@ -145,7 +145,7 @@ health_component.enable_invulnerability(true, 2.5)
 # Desactivarlo de forma manual con:
 health_component.enable_invulnerability(false)
 ```
-# Cuando la vida alcanza cero
+# 😵Cuando la vida alcanza cero
 El componente por si solo emite la señal `died` ofreciendote la flexibilidad de adaptar el comportamiento que tu juego necesita reaccionando a esta señal. Conectandote a ella puedes ejecutar animaciones, llamar a otras funciones, colectar estadísticas o ejecutar otras acciones relevantes para personalizar la experiencia acorde a los requerimentos de tu juego.
 
 ## Comprobacion manual de muerte
@@ -155,7 +155,7 @@ Realiza una comprobación manual para determinar si la entidad ha entrado en est
 
 var is_dead: bool = health_component.check_is_death()
 ```
-# Porcentaje de la vida actual
+# ➗Porcentaje de la vida actual
 Si desea mostrar una barra de salud, puede acceder al formato del porcentaje de salud a través de la función `get_health_percent()`. Esta función devuelve un diccionario estructurado como sigue:
 ```py
 # Por ejemplo, este valor indica que tiene un 80% de vida y no hay overflow.
@@ -176,7 +176,7 @@ Si desea mostrar una barra de salud, puede acceder al formato del porcentaje de 
 ```
 Esta información puede ayudar a representar con precisión el estado de salud y el desbordamiento en una barra de salud visual.
 
-# Multiple health bars
+# 📊Multiple health bars
 Para conseguir esta mecánica puedes simplemente añadir múltiples componentes de salud como hijos en el nodo destino y crear una lógica básica de responsabilidad en cadena usando la señal de `died`. Este es un ejemplo muy básico y te recomendamos que lo adaptes a tus necesidades si son un poco más complejas, sólo queremos darte una idea básica.
 
 ```py
@@ -199,7 +199,7 @@ func on_life_bar_consumed():
 	## Continua la lógica
 ```
 
-# Señales
+# 📶Señales
 ```py
 ### 
 # Puedes acceder al tipo de action en la señal health_changed
@@ -218,7 +218,7 @@ signal invulnerability_changed(active: bool)
 signal died
 ```
 
-# Eres bienvenido a
+# ✌️Eres bienvenido a
 - [Dar feedback](https://github.com/GodotParadise/HealthComponent/pulls)
 - [Sugerir mejoras](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=enhancement&template=feature_request.md&title=)
 - [Reportar bugs](https://github.com/GodotParadise/HealthComponent/issues/new?assignees=BananaHolograma&labels=bug%2C+task&template=bug_report.md&title=)
@@ -228,14 +228,14 @@ GodotParadise esta disponible de forma gratuita.
 Si estas agradecido por lo que hacemos, por favor, considera hacer una donación. Desarrollar los plugins y contenidos de GodotParadise requiere una gran cantidad de tiempo y conocimiento, especialmente cuando se trata de Godot. Incluso 1€ es muy apreciado y demuestra que te importa. ¡Muchas Gracias!
 
 - - -
-# Normas de contribución
+# 🤝Normas de contribución
 **¡Gracias por tu interes en GodotParadise!**
 
 Para garantizar un proceso de contribución fluido y colaborativo, revise nuestras [directrices de contribución](https://github.com/godotparadise/[PLUGIN]/blob/main/CONTRIBUTING.md) antes de empezar. Estas directrices describen las normas y expectativas que mantenemos en este proyecto.
 
-**Código de conducta:** En este proyecto nos adherimos estrictamente al [Código de conducta de Godot](https://godotengine.org/code-of-conduct/). Como colaborador, es importante respetar y seguir este código para mantener una comunidad positiva e inclusiva.
+**📓Código de conducta:** En este proyecto nos adherimos estrictamente al [Código de conducta de Godot](https://godotengine.org/code-of-conduct/). Como colaborador, es importante respetar y seguir este código para mantener una comunidad positiva e inclusiva.
 - - -
 
 
-# Contáctanos
-Si has construido un proyecto, demo, script o algun otro ejemplo usando este plugin haznoslo saber y podemos publicarlo en este repositorio para ayudarnos a mejorar y saber que lo que hacemos es útil.
+# 📇Contáctanos
+Si has construido un proyecto, demo, script o algun otro ejemplo usando nuestros plugins haznoslo saber y podemos publicarlo en este repositorio para ayudarnos a mejorar y saber que lo que hacemos es útil.
