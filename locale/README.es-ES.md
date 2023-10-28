@@ -51,6 +51,8 @@ Este componente maneja todos los aspectos relacionados con la recepción de dañ
 Puedes descargar este plugin desde la [Godot asset library](https://godotengine.org/asset-library/asset/2039) oficial usando la pestaña AssetLib de tu editor Godot. Una vez instalado, estás listo para empezar
 ## Manual 
 Para instalar manualmente el plugin, crea una carpeta **"addons"** en la raíz de tu proyecto Godot y luego descarga el contenido de la carpeta **"addons"** de este repositorio
+## CSharp version
+Este plugin ha sido también escrito en C# y puedes encontrarlo en [HealthComponentCSharp](https://github.com/GodotParadise/HealthComponentCSharp)
 
 # Como empezar
 Incorpora este componente como nodo hijo en el lugar donde quieras implementar la mecánica de vida y daño. Simplemente define los valores iniciales que deseas asignar a este componente.
